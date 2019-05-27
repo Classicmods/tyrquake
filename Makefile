@@ -281,15 +281,9 @@ else ifeq ($(platform), classic_armv8_a35)
 	-fno-unwind-tables -fno-asynchronous-unwind-tables -fno-unroll-loops \
 	-fmerge-all-constants -fno-math-errno \
 	-marm -mtune=cortex-a35 -mfpu=neon-fp-armv8 -mfloat-abi=hard
-	ifeq ($(shell echo `$(CC) -dumpversion` "< 4.9" | bc -l), 1)
-	  CFLAGS += -march=armv8-a
-	else
-	  CFLAGS += -march=armv8-a
-	  # If gcc is 5.0 or later
-	  ifeq ($(shell echo `$(CC) -dumpversion` ">= 5" | bc -l), 1)
-	    LDFLAGS += -static-libgcc -static-libstdc++
-	  endif
-	endif
+	CFLAGS += -march=armv8-a
+	LDFLAGS += -static-libgcc -static-libstdc++
+	
 #######################################
 
 # Libxenon
